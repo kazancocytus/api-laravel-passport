@@ -42,6 +42,19 @@ class ApiController extends Controller
             "password" => "required",
         ]);
 
+        $token = $request->header('Authorization');
+
+        if ($token) {
+            $user = auth()->guard('api')->user();
+
+            if ($user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'You already logged in'
+                ]);
+            }
+        }
+
         if(Auth::attempt([
             "email" => $request->email,
             "password" => $request->password,
