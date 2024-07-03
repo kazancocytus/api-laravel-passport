@@ -27,4 +27,7 @@ Route::post("login", [ApiController::class, "login"]);
 Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("profile", [ApiController::class, "profile"]);
     Route::get("logout", [ApiController::class, "logout"]);
+    Route::post('add-personal-data', [ApiController::class, 'AddPersonalData']);
+    Route::post('edit-personal-data', [ApiController::class, 'UpdatePersonalData']);
+    Route::post('change-password', [ApiController::class, 'ChangePassword']);
 });
